@@ -1,0 +1,55 @@
+extends ./../template
+include ./../header
+
+block content
+    div.container.text-center
+        h3 ToDos:
+        ul.container
+            for todo in todos
+                li.row.col-12 
+                    span.col-1 #{todo.id}
+                    span.col-10 #{todo.task}
+                    if todo.complete
+                        a(href='./todos?metodo=PATCH&id='+todo.id).col-1.text-success COMPLETADO
+                    else
+                        a(href='./todos?metodo=PATCH&id='+todo.id).col-1.text-danger INCOMPLETO
+
+            if(code === 1)
+                li.bg-success.text-white.fw-bold.py-2.my-2 Todo modificado exitosamente
+
+            if(code === 2)
+                li.bg-danger.text-white.fw-bold.py-2.my-2 No se encontró el todo solicitado
+
+            if(code === -1)
+                li.bg-primary.text-white.fw-bold.py-2.my-2 Todo eliminado exitosamente
+
+
+        h3 Buscar Todo
+        form(action='./todos' method="GET")
+            input(name='id' placeholder='Ingrese el ID' type='number', autofocus)
+            button.btn.btn-primary Enviar
+        br
+
+        h3 Publicar Todo
+        form(action='./todos' method="POST")
+            input(name='task' placeholder='Ingrese la tarea' type='text')
+            button.btn.btn-secondary Enviar
+        br
+
+        h3 Modificar Todo
+        form(action='./todos?metodo=PUT' method="POST")
+            input(name='id' placeholder='Ingrese el ID' type='number')
+            input(name='task' placeholder='Ingrese la tarea')
+            button.btn.btn-warning Enviar
+        br
+
+        h3 Borrar Todo
+        form(action='./todos' method="GET")
+            input(name='id' placeholder='Ingrese el ID' type='number')
+            input(name='metodo' value='DELETE').d-none
+            button.btn.btn-danger Enviar
+        br
+
+
+block foot
+    div.bg-secondary.text-light.d-flex.justify-content-center Nikito Inc
