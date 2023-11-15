@@ -20,8 +20,11 @@ let todos = [
 
 let ids = todos.length
 
+
+
 const getTodos = () =>
     ({ titulo, todos, code: 0 })
+
 
 
 const getTodo = ({ id }) => {
@@ -34,18 +37,20 @@ const getTodo = ({ id }) => {
 }
 
 
+
 const postTodo = ({ task }) => {
+
     const todo = {
-        id: ids + 1,
+        id: ++ids,
         task,
         complete: false
     }
 
     todos.push(todo)
-    ids++
 
     return { titulo, todos, code: 1 }
 }
+
 
 
 const updateTodo = (id, task) => {
@@ -63,6 +68,8 @@ const updateTodo = (id, task) => {
     return { titulo, todos, code }
 }
 
+
+
 const updateTask = (id) => {
 
     let code = 2
@@ -78,6 +85,8 @@ const updateTask = (id) => {
     return { titulo, todos, code }
 }
 
+
+
 const deleteTodo = (id) => {
 
     const newTodoList = todos.filter(todo => todo.id !== parseInt(id))
@@ -88,6 +97,7 @@ const deleteTodo = (id) => {
     todos = newTodoList
     return { titulo, todos, code: -1 }
 }
+
 
 
 const services = {
